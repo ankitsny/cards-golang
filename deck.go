@@ -45,6 +45,7 @@ func newDeckFromFile(fileName string) deck {
 	if err != nil {
 		// Option #1 - log the error and call newDeck method and return a new Deck
 		// Option #2 - log the error and exit the program
+		fmt.Println(err)
 		os.Exit(1)
 	}
 	return deck(strings.Split(string(bs), ","))
