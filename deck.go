@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
 )
@@ -45,8 +46,18 @@ func newDeckFromFile(fileName string) deck {
 	if err != nil {
 		// Option #1 - log the error and call newDeck method and return a new Deck
 		// Option #2 - log the error and exit the program
-		fmt.Println(err)
+		fmt.Println("Error ", err)
 		os.Exit(1)
 	}
 	return deck(strings.Split(string(bs), ","))
+}
+
+func (d deck) suffle() deck {
+	for i := range d {
+		// FIXME: generates same sequence every time, to fix this we need to change the seed value
+		rndPos := rand.Intn(len(d) - 1)
+		// Swap the values
+		d[rndPos], d[i] = d[i], d[rndPos]
+	}
+	return d
 }
