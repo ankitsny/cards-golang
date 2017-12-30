@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 type deck []string
@@ -53,9 +54,12 @@ func newDeckFromFile(fileName string) deck {
 }
 
 func (d deck) suffle() deck {
+	// Sourse of new Random
+	sourse := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(sourse)
+
 	for i := range d {
-		// FIXME: generates same sequence every time, to fix this we need to change the seed value
-		rndPos := rand.Intn(len(d) - 1)
+		rndPos := r.Intn(len(d) - 1)
 		// Swap the values
 		d[rndPos], d[i] = d[i], d[rndPos]
 	}

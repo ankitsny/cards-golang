@@ -10,6 +10,6 @@ func main() {
 
 	// Fetch cards from the file
 	nc := newDeckFromFile("my_cards")
-	nc.print()
+	nc.suffle().print()
 
 }
